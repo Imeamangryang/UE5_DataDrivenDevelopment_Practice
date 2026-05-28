@@ -4,7 +4,6 @@
 #include "InputActionValue.h"
 #include "InputGamePlayTags.h"
 
-
 void ABasePlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -32,27 +31,20 @@ void ABasePlayerController::SetupInputComponent()
 		ETriggerEvent::Triggered,
 		this,
 		&ThisClass::Input_Move);
-
+	
 	BaseInputComponent->BindInputActionByTag(
 		InputConfig,
-		InputGamePlayTags::InputTag_Action_MouseLeft,
-		ETriggerEvent::Started,
+		InputGamePlayTags::InputTag_Action_LightAttack,
+		ETriggerEvent::Triggered,
 		this,
-		&ThisClass::Input_MouseLeft);
-
+		&ThisClass::Input_LightAttack);
+	
 	BaseInputComponent->BindInputActionByTag(
 		InputConfig,
-		InputGamePlayTags::InputTag_Action_MouseRight,
-		ETriggerEvent::Started,
+		InputGamePlayTags::InputTag_Action_HeavyAttack,
+		ETriggerEvent::Triggered,
 		this,
-		&ThisClass::Input_MouseRight);
-
-	BaseInputComponent->BindInputActionByTag(
-		InputConfig,
-		InputGamePlayTags::InputTag_Action_MouseMiddle,
-		ETriggerEvent::Started,
-		this,
-		&ThisClass::Input_MouseMiddle);
+		&ThisClass::Input_HeavyAttack);
 }
 
 void ABasePlayerController::Input_Move(const FInputActionValue& Value)
@@ -62,17 +54,14 @@ void ABasePlayerController::Input_Move(const FInputActionValue& Value)
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Move: X=%.2f Y=%.2f"), MoveValue.X, MoveValue.Y));
 }
 
-void ABasePlayerController::Input_MouseLeft(const FInputActionValue& Value)
+void ABasePlayerController::Input_LightAttack(const FInputActionValue& Value)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("MouseLeft"));
+	UE_LOG(LogTemp, Log, TEXT("Light Attack Triggered"));	
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Light Attack Triggered"));
 }
 
-void ABasePlayerController::Input_MouseRight(const FInputActionValue& Value)
+void ABasePlayerController::Input_HeavyAttack(const FInputActionValue& Value)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("MouseRight"));
-}
-
-void ABasePlayerController::Input_MouseMiddle(const FInputActionValue& Value)
-{
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("MouseMiddle"));
+	UE_LOG(LogTemp, Log, TEXT("Heavy Attack Triggered"));	
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Heavy Attack Triggered"));
 }

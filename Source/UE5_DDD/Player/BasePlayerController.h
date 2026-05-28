@@ -25,7 +25,6 @@ protected:
 	TObjectPtr<UInputMappingContext> DefaultMappingContext;
 
 	void Input_Move(const FInputActionValue& Value);
-	void Input_MouseLeft(const FInputActionValue& Value);
-	void Input_MouseRight(const FInputActionValue& Value);
-	void Input_MouseMiddle(const FInputActionValue& Value);
+	void Input_LightAttack(const FInputActionValue& Value);
+	void Input_HeavyAttack(const FInputActionValue& Value);
 };
